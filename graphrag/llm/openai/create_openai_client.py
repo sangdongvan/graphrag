@@ -2,7 +2,7 @@
 # Licensed under the MIT License
 
 """Create OpenAI client instance."""
-
+import httpx
 import logging
 from functools import cache
 
@@ -62,4 +62,5 @@ def create_openai_client(
         # Timeout/Retry Configuration - Use Tenacity for Retries, so disable them here
         timeout=configuration.request_timeout or 180.0,
         max_retries=0,
+        http_client=httpx.Client(proxy="http://localhost:12001"),
     )

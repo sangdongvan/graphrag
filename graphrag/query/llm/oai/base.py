@@ -2,7 +2,7 @@
 # Licensed under the MIT License
 
 """Base classes for LLM and Embedding models."""
-
+import httpx
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 
@@ -165,6 +165,7 @@ class OpenAILLMImpl(BaseOpenAILLM):
                 # Retry Configuration
                 timeout=self.request_timeout,
                 max_retries=self.max_retries,
+                http_client=httpx.Client(proxy="http://localhost:12001"),
             )
 
             async_client = AsyncOpenAI(
@@ -174,6 +175,7 @@ class OpenAILLMImpl(BaseOpenAILLM):
                 # Retry Configuration
                 timeout=self.request_timeout,
                 max_retries=self.max_retries,
+                http_client=httpx.Client(proxy="http://localhost:12001"),
             )
             self.set_clients(sync_client=sync_client, async_client=async_client)
 
