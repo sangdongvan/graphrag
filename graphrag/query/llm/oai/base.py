@@ -165,7 +165,7 @@ class OpenAILLMImpl(BaseOpenAILLM):
                 # Retry Configuration
                 timeout=self.request_timeout,
                 max_retries=self.max_retries,
-                http_client=httpx.Client(proxy="http://localhost:12001", verify=False),
+                http_client=httpx.Client(proxy="http://localhost:12001", verify=False, timeout=None),
             )
 
             async_client = AsyncOpenAI(
@@ -175,7 +175,7 @@ class OpenAILLMImpl(BaseOpenAILLM):
                 # Retry Configuration
                 timeout=self.request_timeout,
                 max_retries=self.max_retries,
-                http_client=httpx.AsyncClient(proxy="http://localhost:12001", verify=False),
+                http_client=httpx.AsyncClient(proxy="http://localhost:12001", verify=False, timeout=None),
             )
             self.set_clients(sync_client=sync_client, async_client=async_client)
 
